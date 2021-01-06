@@ -12,6 +12,8 @@ import { PAGES_ROUTES } from "./pages.routes.js";
 import { ConfigAgendaComponent } from './config-agenda/config-agenda.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { SeguridadComponent } from './seguridad/seguridad.component';
+import { LoadingComponent } from './loading/loading.component';
+import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { SeguridadComponent } from './seguridad/seguridad.component';
     CalendarioComponent,
     ConfigAgendaComponent,
     UsuariosComponent,
-    SeguridadComponent
+    SeguridadComponent,
+    LoadingComponent,
+    PerfilUsuarioComponent
   ],
   imports: [
     CommonModule,

@@ -5,11 +5,15 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { SeguridadComponent } from './seguridad/seguridad.component';
 import { ConfigAgendaComponent } from './config-agenda/config-agenda.component';
+import { AuthGuard } from '../guards/auth.guard';
+import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 
 const pagesRoutes: Routes = [
   {
     path: "admin",
     component: PagesComponent,
+    runGuardsAndResolvers: "always",
+    canActivate: [AuthGuard],
     children: [
       {
         path: "dashboard",
@@ -24,6 +28,11 @@ const pagesRoutes: Routes = [
       { 
         path: "usuarios",
         component: UsuariosComponent,
+        data: { titulo: "Usuarios" },
+      },
+      { 
+        path: "perfil-usuario/:id",
+        component: PerfilUsuarioComponent,
         data: { titulo: "Usuarios" },
       },
       { 
