@@ -28,7 +28,7 @@ export class ConfigAgendaUsuariosComponent implements OnInit {
   }
 
   irPerfilUsuario(id, tipoPerfil) {
-    this.router.navigate(['/admin/perfil-usuario/', id]);
+    this.router.navigate(['/admin/configurar-agenda/', id]);
   }
 
 

@@ -50,7 +50,7 @@ const pagesRoutes: Routes = [
         data: { titulo: "Usuarios" },
       },
       { 
-        path: "configurar-agenda",
+        path: "configurar-agenda/:id",
         component: ConfigAgendaComponent,
         data: { titulo: "Configurar Agenda" },
       },
@@ -65,7 +65,7 @@ const pagesRoutes: Routes = [
         data: { titulo: "Seguridad" },
       },
       { 
-        path: "seguridad",
+        path: "seguridad/:id",
         component: SeguridadComponent,
         data: { titulo: "Seguridad" },
       },
