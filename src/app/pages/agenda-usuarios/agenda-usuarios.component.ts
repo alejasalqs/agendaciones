@@ -3,11 +3,11 @@ import { CompaniaService } from 'src/app/services/compania.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-usuarios',
-  templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css']
+  selector: 'app-agenda-usuarios',
+  templateUrl: './agenda-usuarios.component.html',
+  styleUrls: ['./agenda-usuarios.component.css']
 })
-export class UsuariosComponent implements OnInit {
+export class AgendaUsuariosComponent implements OnInit {
 
   constructor(private companiaService: CompaniaService,private router: Router) { }
 
@@ -28,7 +28,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   irPerfilUsuario(id, tipoPerfil) {
-    this.router.navigate(['/admin/perfil-usuario/', id]);
+    this.router.navigate(['/admin/agenda/', id]);
   }
 
 }

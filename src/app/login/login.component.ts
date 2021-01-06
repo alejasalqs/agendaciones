@@ -16,14 +16,14 @@ export class LoginComponent implements OnInit {
     contrasena: ''
   };
 
-  loading = false;
+  loading;
 
   ngOnInit(): void {
+    this.loading = false;
   }
 
   login(){
     this.loading = true;
-    console.log(this.model);
     this.authService.login(this.model).subscribe(
       () => {
       console.log('Credenciales válides');

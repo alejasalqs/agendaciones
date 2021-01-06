@@ -7,6 +7,10 @@ import { SeguridadComponent } from './seguridad/seguridad.component';
 import { ConfigAgendaComponent } from './config-agenda/config-agenda.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
+import { AgendaUsuariosComponent } from './agenda-usuarios/agenda-usuarios.component';
+import { SeguridadUsuariosComponent } from './seguridad-usuarios/seguridad-usuarios.component';
+import { ConfigAgendaUsuariosComponent } from './config-agenda-usuarios/config-agenda-usuarios.component';
+import { SoporteComponent } from './soporte/soporte.component';
 
 const pagesRoutes: Routes = [
   {
@@ -20,9 +24,19 @@ const pagesRoutes: Routes = [
         component: DashboardComponent,
         data: { titulo: "Dashboard" },
       },
+      {
+        path: "soporte",
+        component: SoporteComponent,
+        data: { titulo: "Dashboard" },
+      },
       { 
-        path: "agenda",
+        path: "agenda/:id",
         component: CalendarioComponent,
+        data: { titulo: "Agenda" },
+      },
+      { 
+        path: "agenda-usuarios",
+        component: AgendaUsuariosComponent,
         data: { titulo: "Agenda" },
       },
       { 
@@ -39,6 +53,16 @@ const pagesRoutes: Routes = [
         path: "configurar-agenda",
         component: ConfigAgendaComponent,
         data: { titulo: "Configurar Agenda" },
+      },
+      { 
+        path: "configurar-agenda-usuarios",
+        component: ConfigAgendaUsuariosComponent,
+        data: { titulo: "Configurar Agenda" },
+      },
+      { 
+        path: "seguridad-usuarios",
+        component: SeguridadUsuariosComponent,
+        data: { titulo: "Seguridad" },
       },
       { 
         path: "seguridad",

@@ -7,7 +7,7 @@ const ROUTES: Routes = [
   { path: "login", component: LoginComponent},
   { path: "recuperar-contraseña", component: RecoverPasswordComponent},
   { path: "**", component: NoPageFoundComponent },
-  { path: "**", redirectTo: "login", pathMatch: "full" },
+  { path: "", redirectTo: "login", pathMatch: "full" },
 ];
 
 export const APP_ROUTES = RouterModule.forRoot(ROUTES, { useHash: true });

@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a router-link="/admin/dashboard" class="brand-link">
+  <a routerLink="/admin/dashboard" class="brand-link">
     <img
       src="../../../assets/img/logo-Argus-Salud-blanco.png"
       alt="Grupo Argus Logo"
@@ -18,7 +18,7 @@
         
       </div>
       <div class="info">
-        <a href="#" class="d-block">Alejandro Salguero</a>
+        <a href="#" class="d-block">{{ usuario?.Nombre + ' ' + usuario?.PrimerApellido + ' ' + usuario?.SegundoApellido }}</a>
       </div>
     </div>
 
@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a routerLink="agenda" class="nav-link">
+          <a routerLink="agenda-usuarios" class="nav-link">
             <i class="nav-icon far fa-calendar-alt"></i>
             <p>Agenda</p>
           </a>
@@ -55,18 +55,18 @@
           </a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a routerLink="configurar-agenda" class="nav-link">
+          <a routerLink="configurar-agenda-usuarios" class="nav-link">
             <i class="nav-icon fas fa-cogs"></i>
             <p>Configurar Agenda</p>
           </a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a routerLink="seguridad" class="nav-link">
+          <a routerLink="seguridad-usuarios" class="nav-link">
             <i class="nav-icon fas fa-lock"></i>
             <p>Seguridad</p>
           </a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li (click)="logout()" class="nav-item" routerLinkActive="active">
           <a class="nav-link">
             <i class="nav-icon fas fa-power-off"></i>
             <p>Cerrar Sesión</p>

@@ -3,11 +3,11 @@ import { CompaniaService } from 'src/app/services/compania.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-usuarios',
-  templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css']
+  selector: 'app-seguridad-usuarios',
+  templateUrl: './seguridad-usuarios.component.html',
+  styleUrls: ['./seguridad-usuarios.component.css']
 })
-export class UsuariosComponent implements OnInit {
+export class SeguridadUsuariosComponent implements OnInit {
 
   constructor(private companiaService: CompaniaService,private router: Router) { }
 
