@@ -14,6 +14,10 @@ export class CompaniaService {
     return this.http.get(this.baseURL + "usuarios/" + id);
   }
 
+  obtenerUsuariosCompaniaPorID(idCompania, idUsuario) {
+    return this.http.get(this.baseURL + "usuarios/" + idCompania +'/'+idUsuario);
+  }
+
   obtenerDoctoresCompania(id) {
     return this.http.get(this.baseURL + "doctores/" + id);
   }

@@ -17,56 +17,37 @@ export class CalendarioComponent implements OnInit {
 
   @ViewChild('fullcalendar',{ static: false }) fullcalendar: FullCalendarComponent;
 
-  options = {
-    editable: true,
-    handleWindowResize: false,
-    expandRows: true,
-    customButtons: {
-      miniCalendario: {
-        text: 'Ir a fecha',
-        click: (template) => {
-          //this.fullcalendar.getApi().gotoDate('2020-01-18');
-          //this.modalService.open(template);
-        }
-      }
-    },
-    themeSystem: 'bootstrap', // default view, may be bootstrap
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
-    buttonText: {
-      today:    'Hoy',
-      month:    'Mes',
-      week:     'Semana',
-      day:      'Día',
-      list:     'Lista'
-    },
-    locales: [ esLocale, frLocale ],
-    locale: 'es',
-    timeZone: 'America/Costa_Rica',
-    height: '100vh',
-    contentHeight: 800,
-    windowResize: (arg) => {
-      
-    },
-    // add other plugins
-    plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin]
-  };
-
-  calendarWeekends = true;
-  calendarEvents: EventInput[] = [];
-
   calendarOptions: CalendarOptions = {
-    
-  }
+  headerToolbar: {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+  },
+  buttonText: {
+    today:    'Hoy',
+    month:    'Mes',
+    week:     'Semana',
+    day:      'Día',
+    list:     'Lista'
+  },
+  initialView: 'dayGridMonth',
+  initialEvents: [], // alternatively, use the `events` setting to fetch from a feed
+  weekends: true,
+  editable: true,
+  selectable: true,
+  selectMirror: true,
+  dayMaxEvents: true,
+  //locales: [ esLocale, frLocale ],
+  locale: 'es',
+  timeZone: 'America/Costa_Rica',
+};
+
   ngOnInit(): void {
     
   }
 
   ngAfterViewChecked() {
-    this.agregarClasesResponsive();
+    //this.agregarClasesResponsive();
   }
 
   agregarClasesResponsive(){

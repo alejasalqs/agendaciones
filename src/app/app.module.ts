@@ -5,13 +5,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { JwtModule } from "@auth0/angular-jwt";
 import { FullCalendarModule } from "@fullcalendar/angular"; // for FullCalendar!
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { APP_ROUTES } from './app.routes';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
+import { CalendarioClienteComponent } from './calendario-cliente/calendario-cliente.component';
 
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  timeGridPlugin,
+  interactionPlugin
+])
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -22,7 +31,8 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     NoPageFoundComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    CalendarioClienteComponent
   ],
   imports: [
     BrowserModule,

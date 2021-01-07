@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.loading = true;
-    this.authService.login(this.model).subscribe(
+    this.authService.login(this.model,'usuario').subscribe(
       () => {
       console.log('Credenciales válides');
       this.router.navigate(["/admin/dashboard"]);
