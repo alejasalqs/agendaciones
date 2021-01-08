@@ -5,6 +5,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from "@fullcalendar/interaction"; // for dateClick
 import { esLocale, frLocale } from 'ngx-bootstrap/chronos';
+import { AgendaService } from 'src/app/services/agenda.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-calendario',
@@ -13,9 +15,13 @@ import { esLocale, frLocale } from 'ngx-bootstrap/chronos';
 })
 export class CalendarioComponent implements OnInit {
 
-  constructor() { }
+  constructor(private agendaService: AgendaService,private route: ActivatedRoute) { }
 
   @ViewChild('fullcalendar',{ static: false }) fullcalendar: FullCalendarComponent;
+
+  IdDoctor;
+
+  calendarEvents: EventInput[] = [];
 
   calendarOptions: CalendarOptions = {
   headerToolbar: {
@@ -31,7 +37,6 @@ export class CalendarioComponent implements OnInit {
     list:     'Lista'
   },
   initialView: 'dayGridMonth',
-  initialEvents: [], // alternatively, use the `events` setting to fetch from a feed
   weekends: true,
   editable: true,
   selectable: true,
@@ -43,11 +48,16 @@ export class CalendarioComponent implements OnInit {
 };
 
   ngOnInit(): void {
-    
+    this.obtenerParametros();
+    this.cargarEventos();
   }
 
   ngAfterViewChecked() {
     //this.agregarClasesResponsive();
+  }
+
+  obtenerParametros() {
+    this.route.params.subscribe(params => this.IdDoctor = params["id"]);
   }
 
   agregarClasesResponsive(){
@@ -68,5 +78,42 @@ export class CalendarioComponent implements OnInit {
     //  this.detalleEvento = resp.detalle;
     //  const modalRef = this.modalService.open(template);
     //}, err => this.toastr.error('Error al obtener los datos','Error'))
+  }
+
+  cargarEventos() {
+    this.agendaService.obtenerMetodosAgendados(this.IdDoctor).subscribe(
+      (data: any) => {
+        this.darFormatoFechaDDMMYYYY(data.eventos);
+        for (let evento of data.eventos) { 
+          evento.start = evento.start = new Date(evento.start);
+          evento.end = evento.end = new Date(evento.end);
+          evento.timezone = "UTC";
+          this.calendarEvents.push(evento);
+        }
+        
+      }
+    );
+  }
+
+  async darFormatoFechaHora(fecha?: any,hora?: any, minutos?:any) {
+    if (hora) {
+      return `${fecha.year}/${fecha.month}/${fecha.day} ${hora}:${minutos}`
+    } else {
+      return `${fecha.year}/${fecha.month}/${fecha.day}`
+    }
+  }
+
+  darFormatoFechaDDMMYYYY(obj) {
+    try {
+        for(var key of Object.keys(obj)){
+            if(key.toLowerCase().includes('fecha')){
+                obj[key] = new Date(obj[key]).toLocaleString();
+                obj[key] = new Date(obj[key]);
+            }
+        }  
+        return obj;
+    } catch (err) {
+        
+    }
   }
 }

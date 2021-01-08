@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FullCalendarComponent, CalendarOptions } from '@fullcalendar/angular';
+import { FullCalendarComponent, CalendarOptions, EventInput } from '@fullcalendar/angular';
+import { AgendaService } from '../services/agenda.service';
 
 @Component({
   selector: 'app-calendario-cliente',
@@ -8,10 +9,14 @@ import { FullCalendarComponent, CalendarOptions } from '@fullcalendar/angular';
 })
 export class CalendarioClienteComponent implements OnInit {
 
-  constructor() { }
+  constructor(private agendaService: AgendaService) { }
 
   ngOnInit(): void {
+    console.log('hola');
+    this.cargarEventos(1);
   }
+
+  calendarEvents: EventInput[] = [];
 
   @ViewChild('fullcalendar',{ static: false }) fullcalendar: FullCalendarComponent;
 
@@ -29,7 +34,7 @@ export class CalendarioClienteComponent implements OnInit {
     list:     'Lista'
   },
   initialView: 'dayGridMonth',
-  initialEvents: [], // alternatively, use the `events` setting to fetch from a feed
+  events: this.calendarEvents, // alternatively, use the `events` setting to fetch from a feed
   weekends: true,
   editable: true,
   selectable: true,
@@ -40,4 +45,45 @@ export class CalendarioClienteComponent implements OnInit {
   timeZone: 'America/Costa_Rica',
 };
 
+
+ngAfterViewChecked() {
+  //this.agregarClasesResponsive();
+}
+
+agregarClasesResponsive(){
+  let agregarClases = ["col-sm-12","col-lg-6","col-md-6","pt-2","d-flex", "justify-content-center"]
+  document.getElementsByClassName('fc-header-toolbar')[0].classList.add("row");
+  document.getElementsByClassName('fc-left')[0].classList.add(...agregarClases);
+  document.getElementsByClassName('fc-center')[0].classList.add(...agregarClases);
+}
+
+cargarEventos(id) {
+  this.agendaService.obtenerMetodosAgenda(id).subscribe(
+    (data: any) => {
+      this.darFormatoFechaDDMMYYYY(data.eventos);
+      for (let evento of data.eventos) {
+        evento.start = evento.start = new Date(evento.start);
+        evento.end = evento.end = new Date(evento.end);
+        evento.timezone = "UTC";
+        this.calendarEvents.push(evento);
+      }
+      console.log(this.calendarEvents);
+    }
+  );
+}
+
+darFormatoFechaDDMMYYYY(obj) {
+  try {
+      for(var key of Object.keys(obj)){
+          if(key.toLowerCase().includes('fecha')){
+              obj[key] = new Date(obj[key]).toLocaleString();
+              console.log(obj[key]);
+              obj[key] = new Date(obj[key]);
+          }
+      }  
+      return obj;
+  } catch (err) {
+      console.log(err);
+  }
+}
 }
