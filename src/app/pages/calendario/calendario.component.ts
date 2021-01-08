@@ -7,6 +7,8 @@ import interactionPlugin from "@fullcalendar/interaction"; // for dateClick
 import { esLocale, frLocale } from 'ngx-bootstrap/chronos';
 import { AgendaService } from 'src/app/services/agenda.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InformacionCitaComponent } from 'src/app/model/informacion-cita/informacion-cita.component';
 
 @Component({
   selector: 'app-calendario',
@@ -15,7 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CalendarioComponent implements OnInit {
 
-  constructor(private agendaService: AgendaService,private route: ActivatedRoute) { }
+  constructor(private agendaService: AgendaService,private route: ActivatedRoute, private modalService: NgbModal) { }
 
   @ViewChild('fullcalendar',{ static: false }) fullcalendar: FullCalendarComponent;
 
@@ -24,28 +26,37 @@ export class CalendarioComponent implements OnInit {
   calendarEvents: EventInput[] = [];
 
   calendarOptions: CalendarOptions = {
-  headerToolbar: {
-    left: 'prev,next today',
-    center: 'title',
-    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-  },
-  buttonText: {
-    today:    'Hoy',
-    month:    'Mes',
-    week:     'Semana',
-    day:      'Día',
-    list:     'Lista'
-  },
-  initialView: 'dayGridMonth',
-  weekends: true,
-  editable: true,
-  selectable: true,
-  selectMirror: true,
-  dayMaxEvents: true,
-  //locales: [ esLocale, frLocale ],
-  locale: 'es',
-  timeZone: 'America/Costa_Rica',
-};
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    buttonText: {
+      today:    'Hoy',
+      month:    'Mes',
+      week:     'Semana',
+      day:      'Día',
+      list:     'Lista'
+    },
+    initialView: 'dayGridMonth',
+    events: this.calendarEvents, // alternatively, use the `events` setting to fetch from a feed
+    weekends: true,
+    //editable: true,
+    //selectable: true,
+    //selectMirror: true,
+    dayMaxEvents: true,
+    //locales: [ esLocale, frLocale ],
+    locale: 'es',
+    timeZone: 'America/Costa_Rica',
+    eventClick: (info) => {
+      this.open(info.event.id);
+    }
+  };
+
+  open(id) {
+    const modalRef = this.modalService.open(InformacionCitaComponent);
+    modalRef.componentInstance.eventId = id;
+  }
 
   ngOnInit(): void {
     this.obtenerParametros();
@@ -70,14 +81,6 @@ export class CalendarioComponent implements OnInit {
 
   handleDateClick(arg,template) {
     //this.modalService.open(template);
-  }
-
-  eventClick(arg,template) {
-    //this.detalleEvento = {};
-    //this.agendaService.obtenerDetalleEvento(arg.id).subscribe((resp: any) => {
-    //  this.detalleEvento = resp.detalle;
-    //  const modalRef = this.modalService.open(template);
-    //}, err => this.toastr.error('Error al obtener los datos','Error'))
   }
 
   cargarEventos() {

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from "ngx-toastr";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { FullCalendarModule } from "@fullcalendar/angular"; // for FullCalendar!
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -56,6 +57,7 @@ FullCalendarModule.registerPlugins([
   ],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-top-right',

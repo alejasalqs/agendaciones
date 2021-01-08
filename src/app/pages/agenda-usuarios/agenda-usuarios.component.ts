@@ -10,7 +10,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class AgendaUsuariosComponent implements OnInit {
 
-  constructor(private usuariosService: UsuariosService,private router: Router) { }
+  constructor(private companiaService: CompaniaService,private router: Router) { }
 
   usuarios = [];
   loading = false;
@@ -21,10 +21,10 @@ export class AgendaUsuariosComponent implements OnInit {
 
   obtenerUsuarios() {
     this.loading = true;
-    this.usuariosService.obtenerUsuariosDeCompania(1).subscribe((resp: any) => {
-      this.usuarios = resp.usuarios;
+    this.companiaService.obtenerDoctoresCompania(1).subscribe((resp: any) => {
+      this.usuarios = resp.mensaje;
       this.loading = false;
-      //console.log(this.usuarios);
+      console.log(this.usuarios);
     });
   }
 
