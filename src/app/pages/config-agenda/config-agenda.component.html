@@ -1,3 +1,9 @@
+<div class="alert alert-warning alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h5><i class="icon fas fa-exclamation-triangle"></i> Alerta!</h5>
+  Se le recomienda por favor seguir el orden que está estipulado en la página,
+  si hubiera un problema por favor comuníquese a soporte.
+</div>
 <div class="container-fluid">
   <div class="row">
     <!-- left column -->
@@ -9,7 +15,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form>
+        <form #diasForm="ngForm" (ngSubmit)="configurarDias()">
           <div class="card-body">
             <h2>Paso 1</h2>
             <p>Configure los días en los que se van a agendar citas.</p>
@@ -17,25 +23,29 @@
               <input
                 type="checkbox"
                 class="form-check-input"
-                id="exampleCheck1"
+                id="lunes"
+                (click)="checkCheckBoxvalue(dias[0])"
+                [checked]="dias[0].Trabajo" [(ngModel)]="dias[0].Trabajo"
               />
-              <label class="form-check-label" for="exampleCheck1">Lunes</label>
+              <label class="form-check-label" for="lunes">Lunes</label>
             </div>
             <div class="form-check">
               <input
                 type="checkbox"
                 class="form-check-input"
-                id="exampleCheck1"
+                id="martes"
+                (click)="checkCheckBoxvalue(dias[1])" [checked]="dias[1].Trabajo" [(ngModel)]="dias[1].Trabajo"
               />
-              <label class="form-check-label" for="exampleCheck1">Martes</label>
+              <label class="form-check-label" for="martes">Martes</label>
             </div>
             <div class="form-check">
               <input
                 type="checkbox"
                 class="form-check-input"
-                id="exampleCheck1"
+                id="miercoles"
+                (click)="checkCheckBoxvalue(dias[2])" [checked]="dias[2].Trabajo" [(ngModel)]="dias[2].Trabajo"
               />
-              <label class="form-check-label" for="exampleCheck1"
+              <label class="form-check-label" for="miercoles"
                 >Miércoles</label
               >
             </div>
@@ -43,17 +53,19 @@
               <input
                 type="checkbox"
                 class="form-check-input"
-                id="exampleCheck1"
+                id="jueves"
+                (click)="checkCheckBoxvalue(dias[3])" [checked]="dias[3].Trabajo" [(ngModel)]="dias[3].Trabajo"
               />
-              <label class="form-check-label" for="exampleCheck1">Jueves</label>
+              <label class="form-check-label" for="jueves">Jueves</label>
             </div>
             <div class="form-check">
               <input
                 type="checkbox"
                 class="form-check-input"
-                id="exampleCheck1"
+                id="viernes"
+                (click)="checkCheckBoxvalue(dias[4])" (click)="checkCheckBoxvalue(dias[4])" [checked]="dias[4].Trabajo" [(ngModel)]="dias[4].Trabajo"
               />
-              <label class="form-check-label" for="exampleCheck1"
+              <label class="form-check-label" for="viernes"
                 >Viernes</label
               >
             </div>
@@ -61,17 +73,19 @@
               <input
                 type="checkbox"
                 class="form-check-input"
-                id="exampleCheck1"
+                id="sabado"
+                (click)="checkCheckBoxvalue(dias[5])" [checked]="dias[5].Trabajo" [(ngModel)]="dias[5].Trabajo"
               />
-              <label class="form-check-label" for="exampleCheck1">Sábado</label>
+              <label class="form-check-label" for="sabado">Sábado</label>
             </div>
             <div class="form-check">
               <input
                 type="checkbox"
                 class="form-check-input"
-                id="exampleCheck1"
+                id="domingo"
+                (click)="checkCheckBoxvalue(dias[6])" [checked]="dias[6].Trabajo" [(ngModel)]="dias[6].Trabajo"
               />
-              <label class="form-check-label" for="exampleCheck1"
+              <label class="form-check-label" for="domingo"
                 >Domingo</label
               >
             </div>
@@ -79,7 +93,10 @@
           <!-- /.card-body -->
 
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Guardar días</button>
+            <button type="submit" class="btn btn-primary" [disabled]="cargandoDias">
+              <span *ngIf="!cargandoDias">Guardar días</span>
+              <span *ngIf="cargandoDias">Guardando...</span>
+            </button>
           </div>
         </form>
       </div>
@@ -102,33 +119,113 @@
             <input
               type="text"
               class="form-control"
-              id="exampleInputBorder"
+              id="horasDescripcion"
+              name="horasDescripcion"
               placeholder="Descripción"
+              [(ngModel)]="horas.Descripcion"
             />
           </div>
           <label>Hora Inicio</label>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <select
+                <select name="HoraInicial"  [(ngModel)]="horas.HoraInicial"
                   class="custom-select rounded-0"
                   id="exampleSelectRounded0"
                 >
-                  <option>Value 1</option>
-                  <option>Value 2</option>
-                  <option>Value 3</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
                 </select>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <select
+                <select name="MinutoInicial" [(ngModel)]="horas.MinutoInicial"
                   class="custom-select rounded-0"
                   id="exampleSelectRounded0"
                 >
-                  <option>Value 1</option>
-                  <option>Value 2</option>
-                  <option>Value 3</option>
+                <option value="00">00</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+                <option value="32">32</option>
+                <option value="33">33</option>
+                <option value="34">34</option>
+                <option value="35">35</option>
+                <option value="36">36</option>
+                <option value="37">37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+                <option value="45">45</option>
+                <option value="46">46</option>
+                <option value="47">47</option>
+                <option value="48">48</option>
+                <option value="49">49</option>
+                <option value="50">50</option>
+                <option value="51">51</option>
+                <option value="52">52</option>
+                <option value="53">53</option>
+                <option value="54">54</option>
+                <option value="55">55</option>
+                <option value="56">56</option>
+                <option value="57">57</option>
+                <option value="58">58</option>
+                <option value="59">59</option>
                 </select>
               </div>
             </div>
@@ -137,34 +234,137 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <select
+                <select name="HoraFinal" [(ngModel)]="horas.HoraFinal"
                   class="custom-select rounded-0"
                   id="exampleSelectRounded0"
                 >
-                  <option>Value 1</option>
-                  <option>Value 2</option>
-                  <option>Value 3</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
                 </select>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <select
+                <select name="MinutoFinal" [(ngModel)]="horas.MinutoFinal"
                   class="custom-select rounded-0"
                   id="exampleSelectRounded0"
                 >
-                  <option>Value 1</option>
-                  <option>Value 2</option>
-                  <option>Value 3</option>
+                <option value="00">00</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+                <option value="32">32</option>
+                <option value="33">33</option>
+                <option value="34">34</option>
+                <option value="35">35</option>
+                <option value="36">36</option>
+                <option value="37">37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+                <option value="45">45</option>
+                <option value="46">46</option>
+                <option value="47">47</option>
+                <option value="48">48</option>
+                <option value="49">49</option>
+                <option value="50">50</option>
+                <option value="51">51</option>
+                <option value="52">52</option>
+                <option value="53">53</option>
+                <option value="54">54</option>
+                <option value="55">55</option>
+                <option value="56">56</option>
+                <option value="57">57</option>
+                <option value="58">58</option>
+                <option value="59">59</option>
                 </select>
               </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="horasExcluidas.length > 0">
+            <div class="col-md-12">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Inicio</th>
+                    <th scope="col">Fin</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let hora of horasExcluidas">
+                    <th>{{ hora.Descripcion }}</th>
+                    <td>{{ hora.HoraInicial }}</td>
+                    <td>{{ hora.HoraFinal }}</td>
+                    <td><button (click)="desactivarHora(hora.idHora)" type="button" class="btn btn-danger">Eliminar</button></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
         <!-- /.card-body -->
 
         <div class="card-footer">
-          <button type="submit" class="btn btn-primary">Excluir</button>
+          <button type="button" (click)="configurarHoras()" class="btn btn-primary" [disabled]="cargandoHoras">
+            <span *ngIf="!cargandoHoras">Excluir Horas</span>
+            <span *ngIf="cargandoHoras">Excluyendo...</span>
+          </button>
         </div>
       </div>
       <!-- /.card -->
@@ -172,10 +372,12 @@
     <!--/.col (left) -->
     <!-- right column -->
     <div class="col-md-6">
-      <div class="card card-primary">
+      <!-- general form elements disabled -->
+      <div class="card card-success">
         <div class="card-header">
-          <h3 class="card-title">Configurar horario</h3>
+          <h3 class="card-title">Configurar horario y rango de fechas</h3>
         </div>
+        <!-- /.card-header -->
         <div class="card-body">
           <h2>Paso 3</h2>
           <p>
@@ -188,11 +390,22 @@
                 <label>Hora de ingreso</label>
                 <select
                   class="custom-select rounded-0"
-                  id="exampleSelectRounded0"
+                  id="horaInicio"
+                  name="horaInicio" [(ngModel)]="config.Hora"
+                  
                 >
-                  <option>Value 1</option>
-                  <option>Value 2</option>
-                  <option>Value 3</option>
+                <option value="07:00">7:00</option>
+                <option value="07:30">7:30</option>
+                <option value="08:00">8:00</option>
+                <option value="08:30">8:30</option>
+                <option value="09:00">9:00</option>
+                <option value="09:30">9:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30<option>
                 </select>
               </div>
             </div>
@@ -201,31 +414,26 @@
                 <label>Cantidad de horas laborables</label>
                 <select
                   class="custom-select rounded-0"
-                  id="exampleSelectRounded0"
+                  id="HorasLaborales"
+                  name="HorasLaborales" [(ngModel)]="config.HorasLaborales"
                 >
-                  <option>Value 1</option>
-                  <option>Value 2</option>
-                  <option>Value 3</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
                 </select>
               </div>
             </div>
           </div>
-        </div>
-        <!-- /.card-body -->
-
-        <div class="card-footer">
-          <button type="submit" class="btn btn-primary">Guardar horario</button>
-        </div>
-      </div>
-      <!-- /.card -->
-
-      <!-- general form elements disabled -->
-      <div class="card card-success">
-        <div class="card-header">
-          <h3 class="card-title">Rango de fechas</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
+          <br />
           <h2>Paso 4</h2>
           <p>
             Agregue el rango de fechas en el cual quiere que se aplique esta
@@ -233,10 +441,10 @@
           </p>
           <form>
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-12">
                 <!-- text input -->
                 <div class="form-group">
-                  <label>Text</label>
+                  <label>Fecha inicial</label>
                   <input
                     type="text"
                     class="form-control"
@@ -244,184 +452,17 @@
                   />
                 </div>
               </div>
-              <div class="col-sm-6">
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <!-- text input -->
                 <div class="form-group">
-                  <label>Text Disabled</label>
+                  <label>Fecha final</label>
                   <input
                     type="text"
                     class="form-control"
                     placeholder="Enter ..."
-                    disabled=""
                   />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <!-- textarea -->
-                <div class="form-group">
-                  <label>Textarea</label>
-                  <textarea
-                    class="form-control"
-                    rows="3"
-                    placeholder="Enter ..."
-                  ></textarea>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label>Textarea Disabled</label>
-                  <textarea
-                    class="form-control"
-                    rows="3"
-                    placeholder="Enter ..."
-                    disabled=""
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-
-            <!-- input states -->
-            <div class="form-group">
-              <label class="col-form-label" for="inputSuccess"
-                ><i class="fas fa-check"></i> Input with success</label
-              >
-              <input
-                type="text"
-                class="form-control is-valid"
-                id="inputSuccess"
-                placeholder="Enter ..."
-              />
-            </div>
-            <div class="form-group">
-              <label class="col-form-label" for="inputWarning"
-                ><i class="far fa-bell"></i> Input with warning</label
-              >
-              <input
-                type="text"
-                class="form-control is-warning"
-                id="inputWarning"
-                placeholder="Enter ..."
-              />
-            </div>
-            <div class="form-group">
-              <label class="col-form-label" for="inputError"
-                ><i class="far fa-times-circle"></i> Input with error</label
-              >
-              <input
-                type="text"
-                class="form-control is-invalid"
-                id="inputError"
-                placeholder="Enter ..."
-              />
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <!-- checkbox -->
-                <div class="form-group">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" />
-                    <label class="form-check-label">Checkbox</label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      checked=""
-                    />
-                    <label class="form-check-label">Checkbox checked</label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      disabled=""
-                    />
-                    <label class="form-check-label">Checkbox disabled</label>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <!-- radio -->
-                <div class="form-group">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="radio1"
-                    />
-                    <label class="form-check-label">Radio</label>
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="radio1"
-                      checked=""
-                    />
-                    <label class="form-check-label">Radio checked</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" disabled="" />
-                    <label class="form-check-label">Radio disabled</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <!-- select -->
-                <div class="form-group">
-                  <label>Select</label>
-                  <select class="form-control">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label>Select Disabled</label>
-                  <select class="form-control" disabled="">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <!-- Select multiple-->
-                <div class="form-group">
-                  <label>Select Multiple</label>
-                  <select multiple="" class="form-control">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label>Select Multiple Disabled</label>
-                  <select multiple="" class="form-control" disabled="">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
-                  </select>
                 </div>
               </div>
             </div>
@@ -430,7 +471,9 @@
         <!-- /.card-body -->
 
         <div class="card-footer">
-          <button type="submit" class="btn btn-primary">Guardar fechas</button>
+          <button type="submit" (click)="configurar()" class="btn btn-primary">
+            <span>Guardar fechas</span>
+          </button>
         </div>
       </div>
       <!-- /.card -->

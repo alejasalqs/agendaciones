@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AlertsService } from '../services/alerts.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private alert: AlertsService) { }
 
   model = {
     correo: '',
@@ -26,11 +27,10 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.login(this.model,'usuario').subscribe(
       () => {
-      console.log('Credenciales válides');
       this.router.navigate(["/admin/dashboard"]);
       this.loading = false;
     }, err => {
-      console.log('Crendeciales inválidas');
+      this.alert.error('Crendeciales inválidas');
       this.loading = false;
     })
   }
