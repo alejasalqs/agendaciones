@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompaniaService } from 'src/app/services/compania.service';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-config-agenda-usuarios',
@@ -10,7 +11,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class ConfigAgendaUsuariosComponent implements OnInit {
 
-  constructor(private usuariosService: UsuariosService,private router: Router) { }
+  constructor(private companiaService: CompaniaService,private router: Router, private auth: AuthService) { }
 
   usuarios = [];
   loading = false;
@@ -21,8 +22,8 @@ export class ConfigAgendaUsuariosComponent implements OnInit {
 
   obtenerUsuarios() {
     this.loading = true;
-    this.usuariosService.obtenerUsuariosDeCompania(1).subscribe((resp: any) => {
-      this.usuarios = resp.usuarios;
+    this.companiaService.obtenerDoctoresCompania(this.auth.obtenerDoctorLogeado().Compania).subscribe((resp: any) => {
+      this.usuarios = resp.mensaje;
       this.loading = false;
       //console.log(this.usuarios);
     });
