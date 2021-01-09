@@ -9,7 +9,7 @@ import { AlertsService } from '../services/alerts.service';
 export class AuthGuard implements CanActivate {
   constructor (
     private  auth: AuthService,
-    //private alerts: AlertsService,
+    private alerts: AlertsService,
     private router: Router
   ){}
 
@@ -21,8 +21,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
     
-    console.log('Ruta bloqueada');
-    //this.alerts.error("Debe iniciar sesión para acceder a este sitio");
+    this.alerts.error("Debe iniciar sesión para acceder a este sitio");
     this.router.navigate(["/login"]);
   }  
 }

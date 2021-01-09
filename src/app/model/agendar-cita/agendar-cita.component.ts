@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AgendaService } from 'src/app/services/agenda.service';
+import { AlertsService } from 'src/app/services/alerts.service';
 
 @Component({
   selector: 'app-agendar-cita',
@@ -26,14 +27,10 @@ export class AgendarCitaComponent implements OnInit {
 
   loading;
 
-  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService) {
-    console.log(this.eventId);
-    console.log(this.IdDoctor);
+  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private alert: AlertsService) {
   }
 
   ngOnInit(): void {
-    console.log(this.eventId);
-    console.log(this.IdDoctor);
     this.loading = false;
   }
 
@@ -46,8 +43,8 @@ export class AgendarCitaComponent implements OnInit {
     this.loading = false;
     this.activeModal.dismiss();
     this.seAgendo.emit(true);
-    console.log('Esté atento a su correo electrónico o número telefónico para saber más detalles','Se ha agendado su cita correctamente')
+    this.alert.success('Esté atento a su correo electrónico o número telefónico para saber más detalles','Se ha agendado su cita correctamente')
     },
-    error => console.log(error,'Error al momento de realizar la operación'))
+    error => this.alert.error(error,'Error al momento de realizar la operación'))
   }
 }

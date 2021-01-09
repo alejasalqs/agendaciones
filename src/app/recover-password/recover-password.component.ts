@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { AlertsService } from '../services/alerts.service';
 
 @Component({
   selector: 'app-recover-password',
@@ -8,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class RecoverPasswordComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private alert: AlertsService) { }
 
   correo;
 

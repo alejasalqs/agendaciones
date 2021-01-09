@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AgendaService } from 'src/app/services/agenda.service';
+import { AlertsService } from 'src/app/services/alerts.service';
 
 @Component({
   selector: 'app-informacion-cita',
@@ -10,7 +11,7 @@ import { AgendaService } from 'src/app/services/agenda.service';
 })
 export class InformacionCitaComponent implements OnInit {
 
-  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService) { }
+  constructor(public activeModal: NgbActiveModal, private agendaService: AgendaService, private alert: AlertsService) { }
 
   @Input() eventId;
 
@@ -23,12 +24,12 @@ export class InformacionCitaComponent implements OnInit {
   obtenerDetalleEvento() {
     this.agendaService.obtenerDetalleEvento(this.eventId).subscribe((resp: any) => {
       this.detalleEvento = resp.detalle;
-    }, err => console.log('Error al obtener los datos','Error'))
+    }, err => this.alert.error('Error al obtener los datos','Error'))
   }
 
   cancelarCita(id: string){
     this.agendaService.cancelarCita(id).subscribe(resp => {
-      console.log('Se ha cancelado la cita');
+      this.alert.info('Se ha cancelado la cita');
       //this.fullcalendar.getApi().getEventById(id).remove();
     })
   }

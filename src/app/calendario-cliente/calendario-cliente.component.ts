@@ -4,6 +4,7 @@ import { AgendaService } from '../services/agenda.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AgendarCitaComponent } from '../model/agendar-cita/agendar-cita.component';
 import { ActivatedRoute } from '@angular/router';
+import { AlertsService } from '../services/alerts.service';
 
 @Component({
   selector: 'app-calendario-cliente',
@@ -12,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CalendarioClienteComponent implements OnInit {
 
-  constructor(private agendaService: AgendaService, private modalService: NgbModal, private route: ActivatedRoute) { }
+  constructor(private agendaService: AgendaService, private modalService: NgbModal, private route: ActivatedRoute, private alert: AlertsService) { }
 
   ngOnInit(): void {
     this.cargarEventos(1);
@@ -88,6 +89,9 @@ cargarEventos(id) {
         this.calendarEvents.push(evento);
       }
       console.log(this.calendarEvents);
+    }, err => {
+      console.log(err);
+      this.alert.error('Hubo un error al procesar la solicitud');
     }
   );
 }

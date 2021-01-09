@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ActivatedRoute } from '@angular/router';
+import { AlertsService } from 'src/app/services/alerts.service';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -9,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PerfilUsuarioComponent implements OnInit {
 
-  constructor(private usuarioService: UsuariosService, private route: ActivatedRoute) { }
+  constructor(private usuarioService: UsuariosService, private route: ActivatedRoute, private alert: AlertsService) { }
 
   IdDoctor;
   idCompania;
@@ -43,8 +44,10 @@ export class PerfilUsuarioComponent implements OnInit {
     
     this.usuarioService.actualizarPerfilUsuario(this.IdDoctor,this.modelUsuario).subscribe(resp => {
       console.log(resp);
+      this.alert.success('Operación realizada con éxito');
       this.actualizandoDatos = false;
     }, err => {
+      this.alert.error('Hubo un error al procesar la solicitud');
       this.actualizandoDatos = false;
     })
   }

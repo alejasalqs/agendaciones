@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AgendaService } from 'src/app/services/agenda.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { AlertsService } from 'src/app/services/alerts.service';
 
 @Component({
   selector: 'app-config-agenda',
@@ -18,7 +19,7 @@ export class ConfigAgendaComponent implements OnInit {
 
   constructor(private agendaService: AgendaService,
     private auth: AuthService,
-    //private alert: ToastrAlertService,
+    private alert: AlertsService,
     private route: ActivatedRoute) { 
       this.cargandoDias = false;
       this.cargandoHoras = false;
@@ -82,18 +83,18 @@ export class ConfigAgendaComponent implements OnInit {
     this.config.FechaFinal = await this.darFormatoFechaHora(this.config.FechaFinal)
     this.config.IdDoctor = this.IdDoctor;
     this.agendaService.llenarDatos(this.config).subscribe(data => {
-      console.log('Se ha guardado la configuración')
-    },err => console.log(err,'Hubo un problema al realizar la operación'));
+      this.alert.success('Se ha guardado la configuración')
+    },err => this.alert.error(err,'Hubo un problema al realizar la operación'));
   }
 
   configurarDias(){  
     this.cargandoDias = true;
     this.agendaService.configurarDiasLaborales(this.dias).subscribe(resp => {
       this.cargandoDias = false;
-      console.log('Operación realizada con éxito');
+      this.alert.success('Operación realizada con éxito');
     }, err => {
       this.cargandoDias = false;
-      console.log('Hubo un error al realizar la operación')
+      this.alert.error('Hubo un error al realizar la operación')
     })
   }
 
@@ -105,12 +106,12 @@ export class ConfigAgendaComponent implements OnInit {
     delete this.horas.MinutoInicial
     delete  this.horas.MinutoFinal
     this.agendaService.configurarHoras(this.horas).subscribe(resp => {
-      console.log('Operación realizada con éxito');
+      this.alert.success('Operación realizada con éxito');
       this.horasExcluidas.push(this.horas)
       //console.log(this.horasExcluidas);
       this.horas = {};
       this.horas = false;
-    }, err => console.log('Hubo un error al realizar la operación'))
+    }, err => this.alert.error('Hubo un error al realizar la operación'))
   }
 
   desactivarHora(idHora) {

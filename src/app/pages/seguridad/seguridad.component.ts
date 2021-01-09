@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DoctoresService } from 'src/app/services/doctores.service';
 import { CompaniaService } from 'src/app/services/compania.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { AlertsService } from 'src/app/services/alerts.service';
 
 @Component({
   selector: 'app-seguridad',
@@ -12,7 +13,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class SeguridadComponent implements OnInit {
 
-  constructor(private auth: AuthService, private route: ActivatedRoute, private usuarios: UsuariosService) { }
+  constructor(private auth: AuthService, private route: ActivatedRoute, private usuarios: UsuariosService, private alert: AlertsService) { }
 
   loading: boolean;
 
@@ -59,10 +60,10 @@ export class SeguridadComponent implements OnInit {
         IdCompania:  this.idCompania,
         IdUsuario: this.IdDoctor 
       })
-    .subscribe((data: any) => console.log(data.mensaje,'Operación realizada con éxito')
-    ,error => console.log(error.mensaje,'Error al realizar la operación'))
+    .subscribe((data: any) => this.alert.success(data.mensaje,'Operación realizada con éxito')
+    ,error =>this.alert.error(error.mensaje,'Error al realizar la operación'))
     } else {
-      //this.toastr.error('La nueva contraseña debe ser diferente a la contraseña anterior','Error al realizar la operación');
+      this.alert.error('La nueva contraseña debe ser diferente a la contraseña anterior','Error al realizar la operación');
     }
   }
 
