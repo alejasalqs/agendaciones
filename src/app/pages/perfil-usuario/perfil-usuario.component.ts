@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertsService } from 'src/app/services/alerts.service';
 
 @Component({
@@ -10,7 +10,11 @@ import { AlertsService } from 'src/app/services/alerts.service';
 })
 export class PerfilUsuarioComponent implements OnInit {
 
-  constructor(private usuarioService: UsuariosService, private route: ActivatedRoute, private alert: AlertsService) { }
+  constructor(private usuarioService: UsuariosService, 
+              private route: ActivatedRoute, 
+              private alert: AlertsService,
+              private router: Router
+              ) { }
 
   IdDoctor;
   idCompania;
@@ -41,11 +45,12 @@ export class PerfilUsuarioComponent implements OnInit {
     delete this.modelUsuario.Compania;
     delete this.modelUsuario.RolUsuario;
     delete this.modelUsuario.Correo;
-    
+    delete this.modelUsuario.FechaNacimiento;
+
     this.usuarioService.actualizarPerfilUsuario(this.IdDoctor,this.modelUsuario).subscribe(resp => {
-      console.log(resp);
-      this.alert.success('Operación realizada con éxito');
       this.actualizandoDatos = false;
+      this.router.navigate(["/admin/usuarios"]);
+      this.alert.success('Operación realizada con éxito');
     }, err => {
       this.alert.error('Hubo un error al procesar la solicitud');
       this.actualizandoDatos = false;

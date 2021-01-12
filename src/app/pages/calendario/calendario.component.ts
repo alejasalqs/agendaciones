@@ -56,6 +56,7 @@ export class CalendarioComponent implements OnInit {
   open(id) {
     const modalRef = this.modalService.open(InformacionCitaComponent);
     modalRef.componentInstance.eventId = id;
+    modalRef.componentInstance.IdDoctor = this.IdDoctor;
   }
 
   ngOnInit(): void {

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AgendaService } from 'src/app/services/agenda.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertsService } from 'src/app/services/alerts.service';
+
 
 @Component({
   selector: 'app-config-agenda',
@@ -12,15 +13,17 @@ import { AlertsService } from 'src/app/services/alerts.service';
 export class ConfigAgendaComponent implements OnInit {
 
     // cargadores
-    cargandoDias: boolean = false;
-    cargandoHoras: boolean = false;
+    cargandoDias = false;
+    cargandoHoras = false;
   
     IdDoctor;
 
   constructor(private agendaService: AgendaService,
     private auth: AuthService,
     private alert: AlertsService,
-    private route: ActivatedRoute) { 
+    private route: ActivatedRoute,
+    private router: Router
+    ) { 
       this.cargandoDias = false;
       this.cargandoHoras = false;
     }
@@ -83,7 +86,8 @@ export class ConfigAgendaComponent implements OnInit {
     this.config.FechaFinal = await this.darFormatoFechaHora(this.config.FechaFinal)
     this.config.IdDoctor = this.IdDoctor;
     this.agendaService.llenarDatos(this.config).subscribe(data => {
-      this.alert.success('Se ha guardado la configuración')
+      this.router.navigate(["/admin/configurar-agenda-usuarios"]);
+      this.alert.success('Se ha guardado la configuración');
     },err => this.alert.error(err,'Hubo un problema al realizar la operación'));
   }
 

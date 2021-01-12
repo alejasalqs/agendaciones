@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FullCalendarModule } from "@fullcalendar/angular"; // for FullCalendar!
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -57,6 +58,7 @@ FullCalendarModule.registerPlugins([
   ],
   imports: [
     CommonModule,
+    NgbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 10000,

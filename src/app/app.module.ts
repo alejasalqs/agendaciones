@@ -21,6 +21,7 @@ import { CalendarioClienteComponent } from './calendario-cliente/calendario-clie
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgendarCitaComponent } from './model/agendar-cita/agendar-cita.component';
 import { InformacionCitaComponent } from './model/informacion-cita/informacion-cita.component';
+import { ReprogramarCitaComponent } from './model/reprogramar-cita/reprogramar-cita.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -40,7 +41,8 @@ export function tokenGetter() {
     RecoverPasswordComponent,
     CalendarioClienteComponent,
     AgendarCitaComponent,
-    InformacionCitaComponent
+    InformacionCitaComponent,
+    ReprogramarCitaComponent
   ],
   imports: [
     BrowserModule,

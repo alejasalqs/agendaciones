@@ -444,12 +444,13 @@
               <div class="col-sm-12">
                 <!-- text input -->
                 <div class="form-group">
-                  <label>Fecha inicial</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter ..."
-                  />
+                  <label>Fecha Inicial</label>
+                  <div class="input-group">
+                    <input id="dateOfBirth" class="form-control" name="dp" ngbDatepicker #dp="ngbDatepicker" [(ngModel)]="config.FechaInicial">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -457,12 +458,13 @@
               <div class="col-sm-12">
                 <!-- text input -->
                 <div class="form-group">
-                  <label>Fecha final</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter ..."
-                  />
+                  <label>Fecha Final</label>
+                  <div class="input-group">
+                    <input id="dateOfBirth" class="form-control" name="dp2" ngbDatepicker #dp2="ngbDatepicker" [(ngModel)]="config.FechaFinal">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="dp2.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

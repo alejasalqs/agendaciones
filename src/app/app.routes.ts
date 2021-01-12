@@ -7,7 +7,7 @@ import { CalendarioClienteComponent } from './calendario-cliente/calendario-clie
 const ROUTES: Routes = [
   { path: "login", component: LoginComponent},
   { path: "recuperar-contraseña", component: RecoverPasswordComponent},
-  { path: "agenda", component: CalendarioClienteComponent},
+  { path: "agenda/:compania/:agenda", component: CalendarioClienteComponent},
   { path: "**", component: NoPageFoundComponent },
   { path: "", redirectTo: "login", pathMatch: "full" },
 ];

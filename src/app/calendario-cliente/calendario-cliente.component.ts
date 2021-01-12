@@ -3,8 +3,10 @@ import { FullCalendarComponent, CalendarOptions, EventInput } from '@fullcalenda
 import { AgendaService } from '../services/agenda.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AgendarCitaComponent } from '../model/agendar-cita/agendar-cita.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertsService } from '../services/alerts.service';
+import { CompaniaService } from '../services/compania.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-calendario-cliente',
@@ -13,15 +15,22 @@ import { AlertsService } from '../services/alerts.service';
 })
 export class CalendarioClienteComponent implements OnInit {
 
-  constructor(private agendaService: AgendaService, private modalService: NgbModal, private route: ActivatedRoute, private alert: AlertsService) { }
+  constructor(private agendaService: AgendaService,
+              private modalService: NgbModal,
+              private route: ActivatedRoute,
+              private alert: AlertsService,
+              private companiaService: CompaniaService,
+              private router: Router
+              ) { }
 
-  ngOnInit(): void {
-    this.cargarEventos(1);
-  }
 
   calendarEvents: EventInput[] = [];
 
   IdDoctor;
+  compania;
+
+  usuarios = [];
+  loading = false;
 
   @ViewChild('fullcalendar',{ static: false }) fullcalendar: FullCalendarComponent;
 
@@ -39,7 +48,7 @@ export class CalendarioClienteComponent implements OnInit {
     list:     'Lista'
   },
   initialView: 'dayGridMonth',
-  events: this.calendarEvents, // alternatively, use the `events` setting to fetch from a feed
+  events: this.calendarEvents, // alternatively, use the `events` setting to fetch from a fee
   weekends: true,
   //editable: true,
   //selectable: true,
@@ -53,29 +62,52 @@ export class CalendarioClienteComponent implements OnInit {
   }
 };
 
+ngOnInit(): void {
+  this.obtenerParametros();
+}
+
 open(id) {
   const modalRef = this.modalService.open(AgendarCitaComponent);
   modalRef.componentInstance.eventId = id;
   modalRef.componentInstance.IdDoctor = this.IdDoctor;
 }
 
-
-ngAfterViewChecked() {
-  //this.agregarClasesResponsive();
-}
-
 obtenerParametros() {
   this.route.params.subscribe(params => {
-    this.IdDoctor = 1;// params["id"]
+    console.log(params);
+    this.IdDoctor = params["agenda"];
+    this.compania = params["compania"];
+    this.obtenerUsuarios(this.compania);
+    this.cargarEventos(this.IdDoctor);
   });
 }
 
+obtenerUsuarios(compania) {
+  this.loading = true;
+  this.companiaService.obtenerDoctoresCompania(compania).subscribe((resp: any) => {
+    this.usuarios = resp.mensaje;
+    this.loading = false;
+    console.log(this.usuarios);
+  }, err => this.alert.error('Hubo un error al obtener los datos'));
+}
 
 agregarClasesResponsive(){
   let agregarClases = ["col-sm-12","col-lg-6","col-md-6","pt-2","d-flex", "justify-content-center"]
   document.getElementsByClassName('fc-header-toolbar')[0].classList.add("row");
   document.getElementsByClassName('fc-left')[0].classList.add(...agregarClases);
   document.getElementsByClassName('fc-center')[0].classList.add(...agregarClases);
+}
+
+cambiarAgenda(id) {
+  //this.fullcalendar.getApi().removeAllEvents;
+  //this.calendarEvents = [];
+  //this.fullcalendar.getApi().render();
+  //this.router.navigate([`/agenda/${this.compania}/${id}`]);
+  //this.router.navigateByUrl(`/agenda/${this.compania}/${id}`, { skipLocationChange: true }).then(() => {});
+  this.eliminarEventos().then( resp => {
+    this.router.navigate([`/agenda/${this.compania}/${id}`]);
+    //window.location.reload(true);
+  });
 }
 
 cargarEventos(id) {
@@ -88,12 +120,29 @@ cargarEventos(id) {
         evento.timezone = "UTC";
         this.calendarEvents.push(evento);
       }
-      console.log(this.calendarEvents);
+      this.fullcalendar.getApi().addEventSource(this.calendarEvents);
+      this.fullcalendar.getApi().refetchEvents();
+      this.fullcalendar.getApi().render();
+     // console.log(this.calendarEvents);
     }, err => {
       console.log(err);
       this.alert.error('Hubo un error al procesar la solicitud');
     }
   );
+}
+
+eliminarEventos() {
+  return new Promise((resolve,reject) => {
+    for (let evento of this.calendarEvents) {
+      const calendarEvent = this.fullcalendar.getApi().getEventById(evento.id);
+      //console.log(calendarEvent);
+      calendarEvent.remove();
+    }
+    this.fullcalendar.getApi().removeAllEvents;
+    this.calendarEvents = [];
+    this.fullcalendar.getApi().render();
+    resolve();
+  });
 }
 
 darFormatoFechaDDMMYYYY(obj) {
