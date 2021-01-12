@@ -34,7 +34,6 @@ export class ConfigAgendaComponent implements OnInit {
     this.cargandoHoras = false;
     this.obtenerParametros();
     this.obtenerHoras();
-    console.log(this.IdDoctor)
   }
 
   obtenerParametros() {
@@ -55,7 +54,7 @@ export class ConfigAgendaComponent implements OnInit {
   obtenerHoras () {
     this.agendaService.obtenerHoras(this.IdDoctor).subscribe((resp: any) => {
       this.horasExcluidas = resp.horas;
-      console.log(this.horasExcluidas);
+      //console.log(this.horasExcluidas);
     })
   }
 

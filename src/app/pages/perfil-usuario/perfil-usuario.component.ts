@@ -35,7 +35,7 @@ export class PerfilUsuarioComponent implements OnInit {
   obtenerInformacionUsuario() {
     this.usuarioService.obtenerUsuariosDeCompaniaPorId(1, this.IdDoctor).subscribe((resp: any) => {
       this.modelUsuario = resp.usuario;
-      console.log(this.modelUsuario);
+      //console.log(this.modelUsuario);
     })
   }
 

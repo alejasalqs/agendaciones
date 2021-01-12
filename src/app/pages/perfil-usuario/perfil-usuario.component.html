@@ -21,6 +21,7 @@
                     class="form-control"
                     id="Nombre"
                     name="Nombre"
+                    [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="modelUsuario.Nombre"
                     required
                   />
@@ -34,6 +35,7 @@
                     class="form-control"
                     id="PrimerApellido"
                     name="PrimerApellido"
+                    [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="modelUsuario.PrimerApellido"
                     required
                   />
@@ -47,6 +49,7 @@
                     class="form-control"
                     id="SegundoApellido"
                     name="SegundoApellido"
+                    [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="modelUsuario.SegundoApellido"
                     required
                   />
@@ -62,6 +65,7 @@
                     class="form-control"
                     id="Celular"
                     name="Celular"
+                    [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="modelUsuario.Celular"
                     required
                   />

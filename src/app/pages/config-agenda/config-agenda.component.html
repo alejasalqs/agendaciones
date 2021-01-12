@@ -25,6 +25,7 @@
                 class="form-check-input"
                 id="lunes"
                 (click)="checkCheckBoxvalue(dias[0])"
+                [ngModelOptions]="{standalone: true}"
                 [checked]="dias[0].Trabajo" [(ngModel)]="dias[0].Trabajo"
               />
               <label class="form-check-label" for="lunes">Lunes</label>
@@ -35,7 +36,8 @@
                 class="form-check-input"
                 id="martes"
                 (click)="checkCheckBoxvalue(dias[1])" [checked]="dias[1].Trabajo" [(ngModel)]="dias[1].Trabajo"
-              />
+              [ngModelOptions]="{standalone: true}"/>
+
               <label class="form-check-label" for="martes">Martes</label>
             </div>
             <div class="form-check">
@@ -44,7 +46,8 @@
                 class="form-check-input"
                 id="miercoles"
                 (click)="checkCheckBoxvalue(dias[2])" [checked]="dias[2].Trabajo" [(ngModel)]="dias[2].Trabajo"
-              />
+              [ngModelOptions]="{standalone: true}"/>
+
               <label class="form-check-label" for="miercoles"
                 >Miércoles</label
               >
@@ -55,7 +58,8 @@
                 class="form-check-input"
                 id="jueves"
                 (click)="checkCheckBoxvalue(dias[3])" [checked]="dias[3].Trabajo" [(ngModel)]="dias[3].Trabajo"
-              />
+              [ngModelOptions]="{standalone: true}"/>
+
               <label class="form-check-label" for="jueves">Jueves</label>
             </div>
             <div class="form-check">
@@ -63,8 +67,9 @@
                 type="checkbox"
                 class="form-check-input"
                 id="viernes"
-                (click)="checkCheckBoxvalue(dias[4])" (click)="checkCheckBoxvalue(dias[4])" [checked]="dias[4].Trabajo" [(ngModel)]="dias[4].Trabajo"
-              />
+                (click)="checkCheckBoxvalue(dias[4])" [checked]="dias[4].Trabajo" [(ngModel)]="dias[4].Trabajo"
+              [ngModelOptions]="{standalone: true}"/>
+
               <label class="form-check-label" for="viernes"
                 >Viernes</label
               >
@@ -75,7 +80,8 @@
                 class="form-check-input"
                 id="sabado"
                 (click)="checkCheckBoxvalue(dias[5])" [checked]="dias[5].Trabajo" [(ngModel)]="dias[5].Trabajo"
-              />
+              [ngModelOptions]="{standalone: true}"/>
+
               <label class="form-check-label" for="sabado">Sábado</label>
             </div>
             <div class="form-check">
@@ -84,7 +90,8 @@
                 class="form-check-input"
                 id="domingo"
                 (click)="checkCheckBoxvalue(dias[6])" [checked]="dias[6].Trabajo" [(ngModel)]="dias[6].Trabajo"
-              />
+              [ngModelOptions]="{standalone: true}"/>
+
               <label class="form-check-label" for="domingo"
                 >Domingo</label
               >
@@ -123,13 +130,14 @@
               name="horasDescripcion"
               placeholder="Descripción"
               [(ngModel)]="horas.Descripcion"
+              [ngModelOptions]="{standalone: true}"
             />
           </div>
           <label>Hora Inicio</label>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <select name="HoraInicial"  [(ngModel)]="horas.HoraInicial"
+                <select name="HoraInicial" [ngModelOptions]="{standalone: true}"  [(ngModel)]="horas.HoraInicial"
                   class="custom-select rounded-0"
                   id="exampleSelectRounded0"
                 >
@@ -162,7 +170,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <select name="MinutoInicial" [(ngModel)]="horas.MinutoInicial"
+                <select name="MinutoInicial" [ngModelOptions]="{standalone: true}" [(ngModel)]="horas.MinutoInicial"
                   class="custom-select rounded-0"
                   id="exampleSelectRounded0"
                 >
@@ -234,7 +242,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <select name="HoraFinal" [(ngModel)]="horas.HoraFinal"
+                <select name="HoraFinal" [ngModelOptions]="{standalone: true}" [(ngModel)]="horas.HoraFinal"
                   class="custom-select rounded-0"
                   id="exampleSelectRounded0"
                 >
@@ -267,7 +275,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <select name="MinutoFinal" [(ngModel)]="horas.MinutoFinal"
+                <select name="MinutoFinal" [ngModelOptions]="{standalone: true}" [(ngModel)]="horas.MinutoFinal"
                   class="custom-select rounded-0"
                   id="exampleSelectRounded0"
                 >
@@ -391,7 +399,7 @@
                 <select
                   class="custom-select rounded-0"
                   id="horaInicio"
-                  name="horaInicio" [(ngModel)]="config.Hora"
+                  name="horaInicio" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.Hora"
                   
                 >
                 <option value="07:00">7:00</option>
@@ -415,7 +423,7 @@
                 <select
                   class="custom-select rounded-0"
                   id="HorasLaborales"
-                  name="HorasLaborales" [(ngModel)]="config.HorasLaborales"
+                  name="HorasLaborales" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.HorasLaborales"
                 >
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -460,7 +468,7 @@
                 <div class="form-group">
                   <label>Fecha Final</label>
                   <div class="input-group">
-                    <input id="dateOfBirth" class="form-control" name="dp2" ngbDatepicker #dp2="ngbDatepicker" [(ngModel)]="config.FechaFinal">
+                    <input id="dateOfBirth" class="form-control" name="dp2" ngbDatepicker #dp2="ngbDatepicker" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.FechaFinal">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary calendar" (click)="dp2.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
                     </div>

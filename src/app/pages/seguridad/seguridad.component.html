@@ -23,6 +23,7 @@
                 name="contrasenaActual"
                 class="form-control"
                 id="contrasenaActual"
+                [ngModelOptions]="{standalone: true}"
                 [(ngModel)]="modelContrasena.contrasena"
                 required
               />
@@ -34,6 +35,7 @@
                 class="form-control"
                 id="nuevaContrasena"
                 name="nuevaContrasena"
+                [ngModelOptions]="{standalone: true}"
                 [(ngModel)]="modelContrasena.nuevaContrasena"
                 required
               />
@@ -47,6 +49,7 @@
                 class="form-control"
                 id="repetirNuevaContrasena"
                 name="repetirNuevaContrasena"
+                [ngModelOptions]="{standalone: true}"
                 [(ngModel)]="modelContrasena.repetirNuevaContrasena"
                 required
               />
