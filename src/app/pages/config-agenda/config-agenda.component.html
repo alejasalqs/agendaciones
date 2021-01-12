@@ -122,7 +122,7 @@
             libre etc).
           </p>
           <div class="form-group">
-            <label for="exampleInputBorder">Descripción</label>
+            <label for="horasDescripcion">Descripción</label>
             <input
               type="text"
               class="form-control"
@@ -395,7 +395,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label>Hora de ingreso</label>
+                <label for="horaInicio">Hora de ingreso</label>
                 <select
                   class="custom-select rounded-0"
                   id="horaInicio"
@@ -419,7 +419,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label>Cantidad de horas laborables</label>
+                <label for="HorasLaborales">Cantidad de horas laborables</label>
                 <select
                   class="custom-select rounded-0"
                   id="HorasLaborales"
@@ -452,9 +452,9 @@
               <div class="col-sm-12">
                 <!-- text input -->
                 <div class="form-group">
-                  <label>Fecha Inicial</label>
+                  <label for="FechaFinal">Fecha Inicial</label>
                   <div class="input-group">
-                    <input id="dateOfBirth" class="form-control" name="dp" ngbDatepicker #dp="ngbDatepicker" [(ngModel)]="config.FechaInicial">
+                    <input id="FechaInicial" class="form-control" name="dp" ngbDatepicker #dp="ngbDatepicker" [(ngModel)]="config.FechaInicial">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
                     </div>
@@ -466,9 +466,9 @@
               <div class="col-sm-12">
                 <!-- text input -->
                 <div class="form-group">
-                  <label>Fecha Final</label>
+                  <label for="FechaFinal">Fecha Final</label>
                   <div class="input-group">
-                    <input id="dateOfBirth" class="form-control" name="dp2" ngbDatepicker #dp2="ngbDatepicker" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.FechaFinal">
+                    <input id="FechaFinal" class="form-control" name="dp2" ngbDatepicker #dp2="ngbDatepicker" [ngModelOptions]="{standalone: true}" [(ngModel)]="config.FechaFinal">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary calendar" (click)="dp2.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
                     </div>

@@ -17,6 +17,7 @@
                   placeholder="Correo"
                   name="correo"
                   id="correo"
+                  [ngModelOptions]="{standalone: true}"
                   [(ngModel)]="model.correo"
                   required/>
             <div class="input-group-append">
@@ -32,6 +33,7 @@
               placeholder="Contraseña"
               name="contrasena"
               id="contrasena"
+              [ngModelOptions]="{standalone: true}"
               [(ngModel)]="model.contrasena"
             />
             <div class="input-group-append">
@@ -56,7 +58,7 @@
           <a routerLink="/recuperar-contraseña" >Olvidé mi contraseña</a>
         </p>
         <p class="mb-0">
-          <a routerLink="/registro" class="text-center">Registrarse</a>
+          <!--<a routerLink="/registro" class="text-center">Registrarse</a> -->
         </p>
       </div>
       <!-- /.card-body -->
