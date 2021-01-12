@@ -18,7 +18,7 @@ export class AsideComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerUsuarioLoggeado();
-    console.log(this.usuario);
+    //console.log(this.usuario);
   }
 
   obtenerUsuarioLoggeado() {

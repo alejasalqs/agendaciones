@@ -65,7 +65,7 @@ export class InformacionCitaComponent implements OnInit {
     })
   }
 
-  async guardarReprogramacionCita(id: string, modal: any){
+  async guardarReprogramacionCita(id: string){
 
     if ( this.reprogramacionEvento.start === undefined ) {
       this.alert.error('Por favor llenar todos los datos');

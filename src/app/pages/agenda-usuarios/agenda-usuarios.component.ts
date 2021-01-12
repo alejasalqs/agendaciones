@@ -26,7 +26,7 @@ export class AgendaUsuariosComponent implements OnInit {
     this.companiaService.obtenerDoctoresCompania(this.auth.obtenerDoctorLogeado().Compania).subscribe((resp: any) => {
       this.usuarios = resp.mensaje;
       this.loading = false;
-      console.log(this.usuarios);
+      //console.log(this.usuarios);
     }, err => this.alert.error('Hubo un error al obtener los datos'));
   }
 

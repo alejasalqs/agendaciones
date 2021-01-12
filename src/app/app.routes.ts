@@ -8,8 +8,8 @@ const ROUTES: Routes = [
   { path: "login", component: LoginComponent},
   { path: "recuperar-contraseña", component: RecoverPasswordComponent},
   { path: "agenda/:compania/:agenda", component: CalendarioClienteComponent},
+  { path: "", redirectTo: "/login", pathMatch: "full" },
   { path: "**", component: NoPageFoundComponent },
-  { path: "", redirectTo: "login", pathMatch: "full" },
 ];
 
 export const APP_ROUTES = RouterModule.forRoot(ROUTES, { useHash: true });

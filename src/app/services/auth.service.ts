@@ -24,7 +24,7 @@ export class AuthService {
 
     usuario ? url = this.baseUrl + "login?tipo=usuario" : url = this.baseUrl + "login";
 
-    console.log(url);
+    //console.log(url);
 
     return this.http.post(url, model).pipe(
       // descompone el cuerpo y guarda el token en el localstorage

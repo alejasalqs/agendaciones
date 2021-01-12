@@ -74,7 +74,7 @@ open(id) {
 
 obtenerParametros() {
   this.route.params.subscribe(params => {
-    console.log(params);
+    //console.log(params);
     this.IdDoctor = params["agenda"];
     this.compania = params["compania"];
     this.obtenerUsuarios(this.compania);
@@ -87,7 +87,7 @@ obtenerUsuarios(compania) {
   this.companiaService.obtenerDoctoresCompania(compania).subscribe((resp: any) => {
     this.usuarios = resp.mensaje;
     this.loading = false;
-    console.log(this.usuarios);
+    //console.log(this.usuarios);
   }, err => this.alert.error('Hubo un error al obtener los datos'));
 }
 
@@ -125,7 +125,7 @@ cargarEventos(id) {
       this.fullcalendar.getApi().render();
      // console.log(this.calendarEvents);
     }, err => {
-      console.log(err);
+     // console.log(err);
       this.alert.error('Hubo un error al procesar la solicitud');
     }
   );
