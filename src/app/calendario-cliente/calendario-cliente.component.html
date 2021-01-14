@@ -8,15 +8,28 @@
             </div>
             <div class="card-body">
               <!-- the events -->
-              <ul class="list-group">
-                <li (click)="cambiarAgenda(usuario.Id)" class="list-group-item" *ngFor="let usuario of usuarios">
-                  <a class="list-group-item list-group-item-action" aria-current="true">{{usuario.Nombre + ' ' + usuario.PrimerApellido + ' ' + usuario.SegundoApellido}}</a>
+              <ul class="agendas">
+                <li class="agendas-item" (click)="cambiarAgenda(usuario.Id)" *ngFor="let usuario of usuarios">
+                  <a aria-current="true">{{usuario.Nombre + ' ' + usuario.PrimerApellido + ' ' + usuario.SegundoApellido}}</a>
                 </li>
               </ul>
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Información</h3>
+            </div>
+            <div class="card-body">
+              <div class="row justify-content-center">
+                <img class="img-thumbnail" src="{{usuarioSeleccionado[0]?.Foto | imagen}}" [alt]="usuarioSeleccionado[0]?.Nombre"/>
+              </div>
+              <div class="row">
+                <span>{{ usuarioSeleccionado[0]?.Nombre + ' ' + usuarioSeleccionado[0]?.PrimerApellido + ' ' +usuarioSeleccionado[0]?.SegundoApellido }}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- /.col -->

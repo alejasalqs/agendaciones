@@ -1,0 +1,15 @@
+.agendas {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.agendas-item {
+    font-weight: bolder;
+    color: #2c3e50;
+}
+
+.agendas-item:hover {
+    cursor: pointer;
+    text-decoration-line: underline;
+}

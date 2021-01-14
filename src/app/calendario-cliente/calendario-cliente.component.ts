@@ -30,6 +30,7 @@ export class CalendarioClienteComponent implements OnInit {
   compania;
 
   usuarios = [];
+  usuarioSeleccionado;
   loading = false;
 
   @ViewChild('fullcalendar',{ static: false }) fullcalendar: FullCalendarComponent;
@@ -87,7 +88,8 @@ obtenerUsuarios(compania) {
   this.companiaService.obtenerDoctoresCompania(compania).subscribe((resp: any) => {
     this.usuarios = resp.mensaje;
     this.loading = false;
-    //console.log(this.usuarios);
+    console.log(this.usuarios);
+    this.usuarioSeleccionado = this.usuarios.filter(u => u.Id == this.IdDoctor);
   }, err => this.alert.error('Hubo un error al obtener los datos'));
 }
 
@@ -99,14 +101,11 @@ agregarClasesResponsive(){
 }
 
 cambiarAgenda(id) {
-  //this.fullcalendar.getApi().removeAllEvents;
-  //this.calendarEvents = [];
-  //this.fullcalendar.getApi().render();
-  //this.router.navigate([`/agenda/${this.compania}/${id}`]);
-  //this.router.navigateByUrl(`/agenda/${this.compania}/${id}`, { skipLocationChange: true }).then(() => {});
+  if (Number(this.IdDoctor) === Number(id)) return;
   this.eliminarEventos().then( resp => {
+    this.usuarioSeleccionado = this.usuarios.filter(u => u.Id == id);
+    console.log(this.usuarioSeleccionado);
     this.router.navigate([`/agenda/${this.compania}/${id}`]);
-    //window.location.reload(true);
   });
 }
 

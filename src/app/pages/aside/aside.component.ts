@@ -22,7 +22,11 @@ export class AsideComponent implements OnInit {
   }
 
   obtenerUsuarioLoggeado() {
-    this. usuario = this.auth.obtenerDoctorLogeado();
+    this.usuario = this.auth.obtenerDoctorLogeado();
+  }
+
+  irAPerfil() {
+    this.router.navigate(["/admin/perfil-usuario/" + this.usuario.IdUsuario])
   }
 
   logout() {
