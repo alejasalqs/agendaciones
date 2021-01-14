@@ -25,8 +25,11 @@
               <div class="row justify-content-center">
                 <img class="img-thumbnail" src="{{usuarioSeleccionado[0]?.Foto | imagen}}" [alt]="usuarioSeleccionado[0]?.Nombre"/>
               </div>
-              <div class="row">
-                <span>{{ usuarioSeleccionado[0]?.Nombre + ' ' + usuarioSeleccionado[0]?.PrimerApellido + ' ' +usuarioSeleccionado[0]?.SegundoApellido }}</span>
+              <div class="row justify-content-center">
+                <span>
+                  <strong>Nombre: </strong>
+                  {{ usuarioSeleccionado[0]?.Nombre + ' ' + usuarioSeleccionado[0]?.PrimerApellido + ' ' +usuarioSeleccionado[0]?.SegundoApellido }}
+                </span>
               </div>
             </div>
           </div>

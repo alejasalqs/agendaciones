@@ -62,18 +62,4 @@ export class PerfilUsuarioComponent implements OnInit {
       this.actualizandoDatos = false;
     })
   }
-
-  cambiarImg(file:File) {
-    this.imagenSubir = file;
-  }
-
-  subirImagen() {
-    this.subiendoImagen = true;
-    this.fs.actualizarFoto(this.imagenSubir,'doctor',this.IdDoctor)
-    .then(img => {
-      console.log(img) 
-      this.subiendoImagen = false;
-    });
-  }
-
 }

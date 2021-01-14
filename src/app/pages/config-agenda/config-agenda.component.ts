@@ -3,6 +3,7 @@ import { AgendaService } from 'src/app/services/agenda.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 
 
 @Component({
@@ -18,11 +19,16 @@ export class ConfigAgendaComponent implements OnInit {
   
     IdDoctor;
 
+    subiendoImagen;
+    foto;
+    public imagenSubir: File;
+
   constructor(private agendaService: AgendaService,
     private auth: AuthService,
     private alert: AlertsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private fs: FileUploadService
     ) { 
       this.cargandoDias = false;
       this.cargandoHoras = false;
@@ -124,6 +130,18 @@ export class ConfigAgendaComponent implements OnInit {
     })
   }
 
+  cambiarImg(file:File) {
+    this.imagenSubir = file;
+  }
+
+  subirImagen() {
+    this.subiendoImagen = true;
+    this.fs.actualizarFoto(this.imagenSubir,'doctor',this.IdDoctor)
+    .then(img => {
+      console.log(img) 
+      this.subiendoImagen = false;
+    });
+  }
 
   async darFormatoFechaHora(fecha?: any,hora?: any) {
     if (hora) {

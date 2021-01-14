@@ -487,6 +487,31 @@
         </div>
       </div>
       <!-- /.card -->
+      <div class="card card-success">
+        <div class="card-header">
+          <h3 class="card-title">Fotografía</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="foto">Subir foto</label>
+                <input type="file" (change)="cambiarImg($event.target.files[0])" class="form-control-file" id="foto" accept=".jpg,.jpeg,.png">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+          <button type="button" class="btn btn-primary" [disabled]="subiendoImagen" (click)="subirImagen()">
+            <span *ngIf="!subiendoImagen">Subir</span>
+            <span *ngIf="subiendoImagen">Subiendo...</span>
+          </button>
+        </div>
+      </div>
+      <!-- /.card -->
     </div>
     <!--/.col (right) -->
   </div>
