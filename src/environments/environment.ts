@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  apiURL: "https://agenda.grupoargus.co.cr:4000/api/",
+  apiURL: "http://localhost:3000/api/",
 };
+
+//https://agenda.grupoargus.co.cr:4000/api/
 
 /*
  * For easier debugging in development mode, you can import the following file

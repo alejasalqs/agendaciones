@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -13,16 +14,21 @@ export class PerfilUsuarioComponent implements OnInit {
   constructor(private usuarioService: UsuariosService, 
               private route: ActivatedRoute, 
               private alert: AlertsService,
-              private router: Router
+              private router: Router,
+              private fs: FileUploadService
               ) { }
 
   IdDoctor;
   idCompania;
   modelUsuario;
   actualizandoDatos;
+  subiendoImagen;
+  foto;
+  public imagenSubir: File;
 
   ngOnInit(): void {
     this.actualizandoDatos = false;
+    this.subiendoImagen = false;
     this.obtenerParametros();
     this.obtenerInformacionUsuario();
   }
@@ -55,6 +61,19 @@ export class PerfilUsuarioComponent implements OnInit {
       this.alert.error('Hubo un error al procesar la solicitud');
       this.actualizandoDatos = false;
     })
+  }
+
+  cambiarImg(file:File) {
+    this.imagenSubir = file;
+  }
+
+  subirImagen() {
+    this.subiendoImagen = true;
+    this.fs.actualizarFoto(this.imagenSubir,'doctor',this.IdDoctor)
+    .then(img => {
+      console.log(img) 
+      this.subiendoImagen = false;
+    });
   }
 
 }
